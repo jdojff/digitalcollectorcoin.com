@@ -11,6 +11,8 @@ import "./ERC721BasicToken.sol";
  * @dev see https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md
  */
 contract ERC721Token is ERC721, ERC721BasicToken {
+  address private contractManager;
+
   // Token name
   string internal name_;
 
@@ -38,6 +40,27 @@ contract ERC721Token is ERC721, ERC721BasicToken {
   constructor(string _name, string _symbol) public {
     name_ = _name;
     symbol_ = _symbol;
+    contractManager = msg.sender;
+  }
+
+  /* Change contract manager */
+  function changeContractManager (address _newContractManager) public onlyContractManager {
+    if (_newContractManager != contractManager) {
+      contractManager = _newContractManager;
+    } else {
+      revert();
+    }
+  }
+
+  /**
+ *
+ * permission checker
+ */
+  modifier onlyContractManager() {
+    if(msg.sender != contractManager){
+      revert();
+    }
+    _;
   }
 
   /**
@@ -155,7 +178,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
    * @param _to address the beneficiary that will own the minted token
    * @param _tokenId uint256 ID of the token to be minted by the msg.sender
    */
-  function _mint(address _to, uint256 _tokenId) internal {
+  function mint(address _to, uint256 _tokenId) public onlyContractManager {
     super._mint(_to, _tokenId);
 
     allTokensIndex[_tokenId] = allTokens.length;
@@ -168,7 +191,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
    * @param _owner owner of the token to burn
    * @param _tokenId uint256 ID of the token being burned by the msg.sender
    */
-  function _burn(address _owner, uint256 _tokenId) internal {
+  function burn(address _owner, uint256 _tokenId) public onlyContractManager {
     super._burn(_owner, _tokenId);
 
     // Clear metadata (if any)
