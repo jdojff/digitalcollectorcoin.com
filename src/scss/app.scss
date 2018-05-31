@@ -1,0 +1,81 @@
+@import '~bootstrap/scss/bootstrap';
+@import 'variables.scss';
+
+* {
+  outline: 0 !important;
+}
+
+body {
+  font-size: 24pt;
+}
+
+header {
+  background-color: $light_grey;
+  height: 80vh;
+  color: $dark_grey;
+}
+
+h2 {
+  font-size: 40pt;
+  span {
+	display: block;
+  }
+}
+
+.vtable {
+  display: table;
+  width: 100%;
+  height: 80vh;
+  text-align: center;
+  table-layout: fixed;
+}
+
+.vcell {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+
+
+form {
+  &.cta {
+	label,
+	input,
+	button {
+	  display: block;
+	  text-align: center;
+	  margin: 24pt auto 0 auto;
+	}
+  }
+}
+
+input {
+  border: 0;
+  background-color: transparent;
+  min-width: 500px;
+  border-bottom: 2px solid lighten($dark_grey, 15%);
+  font-size: 30pt;
+  transition: $tr_fast;
+
+  &:focus {
+	border-color: $dark_grey;
+  }
+}
+
+button {
+  margin-top: 24pt;
+  background-color: $main_red;
+  color: $white;
+  cursor: pointer;
+  border-radius: 40px;
+  padding: 25px 70px;
+  box-shadow: none;
+  font-size: 14pt;
+  border: 0;
+  transition: $tr_fast;
+
+  &:hover {
+	background-color: $main_red_hover;
+  }
+}
+
