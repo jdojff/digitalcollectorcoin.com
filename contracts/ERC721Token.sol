@@ -34,12 +34,31 @@ contract ERC721Token is ERC721, ERC721BasicToken {
   // Optional mapping for token URIs
   mapping(uint256 => string) internal tokenURIs;
 
+  uint8 denomination;
+  //tokenId - CoinStructure
+  mapping (uint256 => CoinMetaInfo) public metaInfos;
+
+  struct CoinMetaInfo {
+    uint256 tokenId;
+    string serialNumber;
+    uint8 denomination;
+    string cityName;
+    string image;
+  }
+
   /**
    * @dev Constructor function
    */
-  constructor(string _name, string _symbol) public {
-    name_ = _name;
-    symbol_ = _symbol;
+  //todo: unlock in release
+  //constructor(string _name, string _symbol, uint8 _denomination) public {
+  constructor() public {
+    //todo: unlock in release
+  //  name_ = _name;
+  //  symbol_ = _symbol;
+  //  denomination = _denomination;
+    name_ = "Questukas";
+    symbol_ = "QST";
+    denomination = 5;
     contractManager = msg.sender;
   }
 
@@ -132,7 +151,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
    * @param _tokenId uint256 ID of the token to set its URI
    * @param _uri string URI to assign
    */
-  function _setTokenURI(uint256 _tokenId, string _uri) internal {
+  function setTokenURI(uint256 _tokenId, string _uri) public onlyContractManager {
     require(exists(_tokenId));
     tokenURIs[_tokenId] = _uri;
   }
@@ -178,11 +197,20 @@ contract ERC721Token is ERC721, ERC721BasicToken {
    * @param _to address the beneficiary that will own the minted token
    * @param _tokenId uint256 ID of the token to be minted by the msg.sender
    */
-  function mint(address _to, uint256 _tokenId) public onlyContractManager {
+  function mint(address _to, uint256 _tokenId, string _serialNumber, string _cityName, string _image) public /*onlyContractManager*/ {
     super._mint(_to, _tokenId);
 
     allTokensIndex[_tokenId] = allTokens.length;
     allTokens.push(_tokenId);
+
+    //our
+
+    CoinMetaInfo storage coinInfo = metaInfos[_tokenId];
+    coinInfo.tokenId = _tokenId;
+    coinInfo.serialNumber = _serialNumber;
+    coinInfo.denomination = denomination;
+    coinInfo.cityName = _cityName;
+    coinInfo.image = _image;
   }
 
   /**
