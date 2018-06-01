@@ -71,6 +71,9 @@ contract ERC721Token is ERC721, ERC721BasicToken {
     }
   }
 
+    function getOwnedTokens(address _address) public constant returns (uint256[]){
+        return ownedTokens[_address];
+    }
   /**
  *
  * permission checker
