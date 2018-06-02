@@ -42,7 +42,8 @@ class Market extends React.Component {
 		Promise.all([
 			this.getTokensByAddress(web3.eth.accounts[0]),
 			this.updateState(),
-			this.getRegions()
+			this.getRegions(),
+			// this.getTokenRegions()
 		]).then(() => {
 
 		});
@@ -79,7 +80,8 @@ class Market extends React.Component {
             }));
             Promise.all(promises).then(infos => {
                 console.log("All token metadata found.");
-                this.state.tokens = infos;
+                this.setState({tokens: infos});
+                this.setState({image: window.atob(infos[1].image)});
             });
         });
 
@@ -87,7 +89,24 @@ class Market extends React.Component {
 		new Promise((resolve, reject) => {
 			const lithuaniaId = 1;
 			this.state.ContractInstance.countries(lithuaniaId, (err, result) => {
-				this.state.tokenRegions = result.regions;
+
+				let tokenRegions = result.regions.map(region => Object({
+					name: region.regionName,
+					children: region.cities,
+					imageFull: region.image,
+					imagePlaceholder: this.state.regions.find(r => r.name === region.regionName)
+				}));
+
+				let tokenCities = result.regions.flatMap(region =>
+					region.cities.map(city => Object({
+						name: city.cityName,
+						imageFull: city.image,
+						imagePlaceholder: this.state.cities.find(c => c.name === city.cityName)
+					}))
+				);
+
+				this.setState({tokenRegions: tokenRegions});
+				this.setState({tokenCities: tokenCities});
 			});
 		});
 
