@@ -37,15 +37,105 @@ contract ERC721Token is ERC721, ERC721BasicToken {
   uint8 denomination;
   //tokenId - CoinStructure
   mapping (uint256 => CoinMetaInfo) public metaInfos;
+    //countryId -> Country
+    mapping (uint256 => Country) public countries;
+    //regionId -> Region
+    mapping (uint256 => Region) public regions;
+    //cityId -> Cities
+    mapping (uint256 => City) public cities;
 
-  struct CoinMetaInfo {
-    uint256 tokenId;
-    string serialNumber;
-    uint8 denomination;
-    string cityName;
-    string image;
-  }
+    //cityId -> ownedTokensId
+    mapping (uint256 => uint256[]) public ownedCities;
 
+    struct CoinMetaInfo {
+        uint256 tokenId;
+        string serialNumber;
+        uint8 denomination;
+        string cityName;
+        string image;
+        //for new structure
+        uint256 cityId;
+    }
+
+    struct Country {
+        uint256 countryId;
+        string countryName;
+        string image;
+        Region[] regions;
+        //helpers
+        bool isCreated;
+    }
+
+    struct Region {
+        uint256 regionId;
+        string regionName;
+        string image;
+        City[] cities;
+        //helpers
+        bool isCreated;
+    }
+
+    struct City {
+        uint256 cityId;
+        string cityName;
+        string image;
+        uint256 maxLimit;
+        //helpers
+        bool isCreated;
+    }
+
+    function createCountry(uint256 _countryId, string _countryName, string _image) public {
+        Country storage country = countries[_countryId];
+
+        if(country.isCreated){
+            revert();
+        }
+
+        country.countryId = _countryId;
+        country.countryName = _countryName;
+        country.image = _image;
+        country.isCreated = true;
+    }
+
+    function createRegion(uint256 _countryId, uint256 _regionId, string _regionName, string _image) public {
+        Country storage country = countries[_countryId];
+        if(!country.isCreated){//country doesn't exist
+            revert();
+        }
+        Region storage region = regions[_regionId];
+        if(region.isCreated){
+            revert();
+        }
+
+        region.regionId = _regionId;
+        region.regionName = _regionName;
+        region.image = _image;
+        region.isCreated = true;
+
+        //assign region to country
+        country.regions.push(region);
+    }
+
+    function createCity(uint256 _regionId, uint256 _cityId, string _cityName, string _image, uint256 _maxLimit) public {
+        Region storage region = regions[_regionId];
+        if(!region.isCreated){
+            revert();
+        }
+
+        City storage city = cities[_cityId];
+        if(city.isCreated){
+            revert();
+        }
+
+        city.cityId = _cityId;
+        city.cityName = _cityName;
+        city.image = _image;
+        city.maxLimit = _maxLimit;
+        city.isCreated = true;
+
+        //assign city to region
+        region.cities.push(city);
+    }
   /**
    * @dev Constructor function
    */
@@ -154,7 +244,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
    * @param _tokenId uint256 ID of the token to set its URI
    * @param _uri string URI to assign
    */
-  function setTokenURI(uint256 _tokenId, string _uri) public onlyContractManager {
+  function setTokenURI(uint256 _tokenId, string _uri) public /*onlyContractManager*/ {
     require(exists(_tokenId));
     tokenURIs[_tokenId] = _uri;
   }
@@ -216,6 +306,32 @@ contract ERC721Token is ERC721, ERC721BasicToken {
     coinInfo.image = _image;
   }
 
+    function mint2(address _to, uint256 _tokenId, string _serialNumber, uint256 _cityId) public {
+        super._mint(_to, _tokenId);
+
+        allTokensIndex[_tokenId] = allTokens.length;
+        allTokens.push(_tokenId);
+
+        City storage city = cities[_cityId];
+        if(!city.isCreated){
+            revert();
+        }
+        //check limit
+        uint256[] storage cityOwners = ownedCities[_cityId];
+        if(cityOwners.length >= city.maxLimit){
+            revert();
+        }
+
+        CoinMetaInfo storage coinInfo = metaInfos[_tokenId];
+        coinInfo.tokenId = _tokenId;
+        coinInfo.serialNumber = _serialNumber;
+        coinInfo.denomination = denomination;
+        coinInfo.cityName = city.cityName;
+        coinInfo.image = city.image;
+        coinInfo.cityId = _cityId;
+
+        cityOwners.push(_tokenId);
+    }
   /**
    * @dev Internal function to burn a specific token
    * @dev Reverts if the token does not exist
