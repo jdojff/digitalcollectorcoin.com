@@ -50,8 +50,10 @@ p {
 	font-size: 34px;
 }
 
+.customButton,
 button {
 	margin-top: 60px;
+	display: inline-block;
 	border-radius: 10px;
 	border: none;
 	font-size: 14px;
@@ -64,6 +66,8 @@ button {
 	transition: $tr_fast;
 
 	&:hover {
+		text-decoration: none;
+		color: #fff;
 		background-color: lighten(#CB9E62, 15%);
 	}
 }
