@@ -166,6 +166,11 @@ h4 {
 			vertical-align: middle;
 			opacity: .4;
 			transition: $tr_fast;
+
+			svg {
+				width: 100%;
+				height: 240px;
+			}
 		}
 		.achievmentName {
 			color: #fff;
