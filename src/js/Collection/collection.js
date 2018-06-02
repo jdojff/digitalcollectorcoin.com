@@ -29,7 +29,7 @@ class Collection extends React.Component {
         }
         const MyContract = web3.eth.contract(abi);
 
-        this.state.ContractInstance = MyContract.at("0x1545ab27fdadf6c57fefa3bbd0f7ed0a981ee01d");
+        this.state.ContractInstance = MyContract.at("0x2eE998d05e7823969b0d5DB2E7ab0D35844A9780");
         window.a = this.state
 	}
 

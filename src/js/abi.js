@@ -58,28 +58,6 @@ let abi; export default abi = [
         "type": "function"
     },
     {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": true,
-                "name": "_owner",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "name": "_approved",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "name": "_tokenId",
-                "type": "uint256"
-            }
-        ],
-        "name": "Approval",
-        "type": "event"
-    },
-    {
         "constant": false,
         "inputs": [
             {
@@ -88,6 +66,84 @@ let abi; export default abi = [
             }
         ],
         "name": "changeContractManager",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "_regionId",
+                "type": "uint256"
+            },
+            {
+                "name": "_cityId",
+                "type": "uint256"
+            },
+            {
+                "name": "_cityName",
+                "type": "string"
+            },
+            {
+                "name": "_image",
+                "type": "string"
+            },
+            {
+                "name": "_maxLimit",
+                "type": "uint256"
+            }
+        ],
+        "name": "createCity",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "_countryId",
+                "type": "uint256"
+            },
+            {
+                "name": "_countryName",
+                "type": "string"
+            },
+            {
+                "name": "_image",
+                "type": "string"
+            }
+        ],
+        "name": "createCountry",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "_countryId",
+                "type": "uint256"
+            },
+            {
+                "name": "_regionId",
+                "type": "uint256"
+            },
+            {
+                "name": "_regionName",
+                "type": "string"
+            },
+            {
+                "name": "_image",
+                "type": "string"
+            }
+        ],
+        "name": "createRegion",
         "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",
@@ -122,6 +178,54 @@ let abi; export default abi = [
         "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "name": "_to",
+                "type": "address"
+            },
+            {
+                "name": "_tokenId",
+                "type": "uint256"
+            },
+            {
+                "name": "_serialNumber",
+                "type": "string"
+            },
+            {
+                "name": "_cityId",
+                "type": "uint256"
+            }
+        ],
+        "name": "mint2",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "name": "_owner",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "name": "_approved",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "name": "_tokenId",
+                "type": "uint256"
+            }
+        ],
+        "name": "Approval",
+        "type": "event"
     },
     {
         "constant": false,
@@ -172,6 +276,28 @@ let abi; export default abi = [
         "type": "function"
     },
     {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "name": "_from",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "name": "_to",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "name": "_tokenId",
+                "type": "uint256"
+            }
+        ],
+        "name": "Transfer",
+        "type": "event"
+    },
+    {
         "constant": false,
         "inputs": [
             {
@@ -206,28 +332,6 @@ let abi; export default abi = [
         "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": true,
-                "name": "_from",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "name": "_to",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "name": "_tokenId",
-                "type": "uint256"
-            }
-        ],
-        "name": "Transfer",
-        "type": "event"
     },
     {
         "constant": false,
@@ -270,6 +374,72 @@ let abi; export default abi = [
             {
                 "name": "",
                 "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "cities",
+        "outputs": [
+            {
+                "name": "cityId",
+                "type": "uint256"
+            },
+            {
+                "name": "cityName",
+                "type": "string"
+            },
+            {
+                "name": "image",
+                "type": "string"
+            },
+            {
+                "name": "maxLimit",
+                "type": "uint256"
+            },
+            {
+                "name": "isCreated",
+                "type": "bool"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "countries",
+        "outputs": [
+            {
+                "name": "countryId",
+                "type": "uint256"
+            },
+            {
+                "name": "countryName",
+                "type": "string"
+            },
+            {
+                "name": "image",
+                "type": "string"
+            },
+            {
+                "name": "isCreated",
+                "type": "bool"
             }
         ],
         "payable": false,
@@ -385,6 +555,10 @@ let abi; export default abi = [
             {
                 "name": "image",
                 "type": "string"
+            },
+            {
+                "name": "cityId",
+                "type": "uint256"
             }
         ],
         "payable": false,
@@ -409,6 +583,29 @@ let abi; export default abi = [
         "constant": true,
         "inputs": [
             {
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "ownedCities",
+        "outputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
                 "name": "_tokenId",
                 "type": "uint256"
             }
@@ -418,6 +615,37 @@ let abi; export default abi = [
             {
                 "name": "",
                 "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [
+            {
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "regions",
+        "outputs": [
+            {
+                "name": "regionId",
+                "type": "uint256"
+            },
+            {
+                "name": "regionName",
+                "type": "string"
+            },
+            {
+                "name": "image",
+                "type": "string"
+            },
+            {
+                "name": "isCreated",
+                "type": "bool"
             }
         ],
         "payable": false,
@@ -512,4 +740,5 @@ let abi; export default abi = [
         "payable": false,
         "stateMutability": "view",
         "type": "function"
-    }];
+    }
+];

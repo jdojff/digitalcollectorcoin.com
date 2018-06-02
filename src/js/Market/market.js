@@ -21,6 +21,7 @@ class Market extends React.Component {
         this.state = {
             tokens: [],
             ContractInstance: {},
+			tokenRegions: []
         }
 
         if(typeof web3 != 'undefined'){
@@ -32,7 +33,7 @@ class Market extends React.Component {
         }
         const MyContract = web3.eth.contract(abi);
 
-        this.state.ContractInstance = MyContract.at("0x1545ab27fdadf6c57fefa3bbd0f7ed0a981ee01d");
+        this.state.ContractInstance = MyContract.at("0x2eE998d05e7823969b0d5DB2E7ab0D35844A9780");
         window.a = this.state
 	}
 
@@ -71,7 +72,9 @@ class Market extends React.Component {
             let promises = result.map(id => new Promise((resolve, reject) => {
                 console.log("Searching meta info for id " + id);
                 this.state.ContractInstance.metaInfos(id, (err, result) => {
-                    resolve(new TokenMeta(result[0], result[1], result[2], result[3], result[4]));
+                    let meta = new TokenMeta(result[0], result[1], result[2], result[3], result[4]);
+                    console.log(meta);
+                    resolve(meta);
                 });
             }));
             Promise.all(promises).then(infos => {
@@ -79,6 +82,14 @@ class Market extends React.Component {
                 this.state.tokens = infos;
             });
         });
+
+	getTokenRegions = () =>
+		new Promise((resolve, reject) => {
+			const lithuaniaId = 1;
+			this.state.ContractInstance.countries(lithuaniaId, (err, result) => {
+				this.state.tokenRegions = result.regions;
+			});
+		});
 
 	getRegions = () => {
 		if (this._isMounted) {
