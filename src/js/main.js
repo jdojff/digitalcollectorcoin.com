@@ -14,13 +14,15 @@ import 'bootstrap';
 // GLOBALS
 import Landing from './Landing/landing';
 import Market from './Market/market';
+import Collection from './Collection/collection';
 
 
 
 export default {
 	// GLOBALS
 	Landing,
-	Market
+	Market,
+	Collection
 
 	// PUBLIC PAGES
 	// index: (...args) =>

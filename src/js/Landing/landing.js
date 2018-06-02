@@ -46,7 +46,7 @@ class Landing extends React.Component {
 							<InlineSVG src={dccLogo} />
 						</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
-						<a href="../dist/market.html" className="customButton">Dalyvauti</a>
+						<a href="market.html" className="customButton">Dalyvauti</a>
 					</div>
 					<div className="col-lg-6 bg-blue">
 						<InlineSVG src={coinGroup} />

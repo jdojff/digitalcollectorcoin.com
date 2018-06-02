@@ -8,9 +8,9 @@ import TokenMeta from "../TokenMeta";
 import abi from "../abi";
 
 //SCSS
-import './Market.scss';
+import './Collection.scss';
 
-class Market extends React.Component {
+class Collection extends React.Component {
 	_isMounted = false;
 
 	constructor(props) {
@@ -82,7 +82,9 @@ class Market extends React.Component {
 									</a>
 								</li>
 								<li>
-								    <a href="collection.html">Your collection</a>
+									<a>
+										Your collection
+									</a>
 								</li>
 								<li>
 									<a>
@@ -195,5 +197,5 @@ class Market extends React.Component {
 }
 
 export default() => {
-	ReactDOM.render(<Market />, document.querySelector('#root'))
+	ReactDOM.render(<Collection />, document.querySelector('#root'))
 }
