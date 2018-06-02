@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import Web3 from 'web3';
 import InlineSVG from 'svg-inline-react';
 import dccLogo from './../../img/dcclogo.svg';
-import coin from './../../img/coin10.svg';
+import coin from './../../img/coin10.svg'
+import TokenMeta from "../TokenMeta";
+import abi from "../abi";
 
 //SCSS
 import './Market.scss';
@@ -12,445 +14,23 @@ class Market extends React.Component {
 	_isMounted = false;
 
 	constructor(props) {
-		super(props)
-		this.state = {
-			tokensCount: 0,
-			totalSupply: 0,
-			name: 'No name',
-			symbol: 'xXx',
-			currentRound: 0,
-			lastBlockNumberInRound: 0,
-			blockNumber: 0,
-			blocksPerRound: 0,
-			title: '',
-			image: 'super example'
-		}
+        super(props)
+        this.state = {
+            tokens: [],
+            ContractInstance: {},
+        }
 
-		if (typeof web3 != 'undefined') {
-			console.log("Using web3 detected from external source like Metamask");
-			this.web3 = new Web3(web3.currentProvider);
-		} else {
-			console.log("No web3 detected. Falling back to http://localhost:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
-			this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-		}
+        if(typeof web3 != 'undefined'){
+            console.log("Using web3 detected from external source like Metamask")
+            this.web3 = new Web3(web3.currentProvider)
+        }else{
+            console.log("No web3 detected. Falling back to http://localhost:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
+            this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
+        }
+        const MyContract = web3.eth.contract(abi);
 
-		const MyContract = web3.eth.contract([
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"name": "_to",
-						"type": "address"
-					}, {
-						"name": "_tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "approve",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			}, {
-				"constant": false,
-				"inputs": [
-					{
-						"name": "_owner",
-						"type": "address"
-					}, {
-						"name": "_tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "burn",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			}, {
-				"constant": false,
-				"inputs": [
-					{
-						"name": "_newContractManager",
-						"type": "address"
-					}
-				],
-				"name": "changeContractManager",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			}, {
-				"constant": false,
-				"inputs": [
-					{
-						"name": "_to",
-						"type": "address"
-					}, {
-						"name": "_tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "mint",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			}, {
-				"constant": false,
-				"inputs": [
-					{
-						"name": "_from",
-						"type": "address"
-					}, {
-						"name": "_to",
-						"type": "address"
-					}, {
-						"name": "_tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "safeTransferFrom",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			}, {
-				"constant": false,
-				"inputs": [
-					{
-						"name": "_from",
-						"type": "address"
-					}, {
-						"name": "_to",
-						"type": "address"
-					}, {
-						"name": "_tokenId",
-						"type": "uint256"
-					}, {
-						"name": "_data",
-						"type": "bytes"
-					}
-				],
-				"name": "safeTransferFrom",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			}, {
-				"constant": false,
-				"inputs": [
-					{
-						"name": "_to",
-						"type": "address"
-					}, {
-						"name": "_approved",
-						"type": "bool"
-					}
-				],
-				"name": "setApprovalForAll",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			}, {
-				"constant": false,
-				"inputs": [
-					{
-						"name": "_tokenId",
-						"type": "uint256"
-					}, {
-						"name": "_uri",
-						"type": "string"
-					}
-				],
-				"name": "setTokenURI",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			}, {
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"name": "_from",
-						"type": "address"
-					}, {
-						"indexed": true,
-						"name": "_to",
-						"type": "address"
-					}, {
-						"indexed": false,
-						"name": "_tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "Transfer",
-				"type": "event"
-			}, {
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"name": "_owner",
-						"type": "address"
-					}, {
-						"indexed": true,
-						"name": "_approved",
-						"type": "address"
-					}, {
-						"indexed": false,
-						"name": "_tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "Approval",
-				"type": "event"
-			}, {
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"name": "_owner",
-						"type": "address"
-					}, {
-						"indexed": true,
-						"name": "_operator",
-						"type": "address"
-					}, {
-						"indexed": false,
-						"name": "_approved",
-						"type": "bool"
-					}
-				],
-				"name": "ApprovalForAll",
-				"type": "event"
-			}, {
-				"constant": false,
-				"inputs": [
-					{
-						"name": "_from",
-						"type": "address"
-					}, {
-						"name": "_to",
-						"type": "address"
-					}, {
-						"name": "_tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "transferFrom",
-				"outputs": [],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			}, {
-				"inputs": [
-					{
-						"name": "_name",
-						"type": "string"
-					}, {
-						"name": "_symbol",
-						"type": "string"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			}, {
-				"constant": true,
-				"inputs": [
-					{
-						"name": "_owner",
-						"type": "address"
-					}
-				],
-				"name": "balanceOf",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			}, {
-				"constant": true,
-				"inputs": [
-					{
-						"name": "_tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "exists",
-				"outputs": [
-					{
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			}, {
-				"constant": true,
-				"inputs": [
-					{
-						"name": "_tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "getApproved",
-				"outputs": [
-					{
-						"name": "",
-						"type": "address"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			}, {
-				"constant": true,
-				"inputs": [
-					{
-						"name": "_owner",
-						"type": "address"
-					}, {
-						"name": "_operator",
-						"type": "address"
-					}
-				],
-				"name": "isApprovedForAll",
-				"outputs": [
-					{
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			}, {
-				"constant": true,
-				"inputs": [],
-				"name": "name",
-				"outputs": [
-					{
-						"name": "",
-						"type": "string"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			}, {
-				"constant": true,
-				"inputs": [
-					{
-						"name": "_tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "ownerOf",
-				"outputs": [
-					{
-						"name": "",
-						"type": "address"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			}, {
-				"constant": true,
-				"inputs": [],
-				"name": "symbol",
-				"outputs": [
-					{
-						"name": "",
-						"type": "string"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			}, {
-				"constant": true,
-				"inputs": [
-					{
-						"name": "_index",
-						"type": "uint256"
-					}
-				],
-				"name": "tokenByIndex",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			}, {
-				"constant": true,
-				"inputs": [
-					{
-						"name": "_owner",
-						"type": "address"
-					}, {
-						"name": "_index",
-						"type": "uint256"
-					}
-				],
-				"name": "tokenOfOwnerByIndex",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			}, {
-				"constant": true,
-				"inputs": [
-					{
-						"name": "_tokenId",
-						"type": "uint256"
-					}
-				],
-				"name": "tokenURI",
-				"outputs": [
-					{
-						"name": "",
-						"type": "string"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			}, {
-				"constant": true,
-				"inputs": [],
-				"name": "totalSupply",
-				"outputs": [
-					{
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			}
-		]);
-		this.state.ContractInstance = MyContract.at("0x2E719d4D74fcd2c7214882fbe88d5970Baed30c5");
-		window.a = this.state;
+        this.state.ContractInstance = MyContract.at("0x1545ab27fdadf6c57fefa3bbd0f7ed0a981ee01d");
+        window.a = this.state
 	}
 
 	componentDidMount() {
@@ -466,14 +46,24 @@ class Market extends React.Component {
 
 	updateState = () =>
 		new Promise((resolve, reject) => {
-			this.state.ContractInstance.tokenURI(101, (err, result) => {
-				if (result !== null && this._isMounted) {
-					let imageSrc = window.atob(result);
-					this.setState({
-						image: imageSrc
-					});
-				}
-			});
+            new Promise((resolve, reject) => {
+                this.state.ContractInstance.getOwnedTokens("0x1245bd304ed9c70c1b7a89f7619e7e53a78850bd", (err, result) => {
+                    console.log("Owned token ids: " + result);
+                    resolve(result);
+                });
+            }).then((result) => {
+                if(result == null) return;
+                let promises = result.map(id => new Promise((resolve, reject) => {
+                    console.log("Searching meta info for id " + id);
+                    this.state.ContractInstance.metaInfos(id, (err, result) => {
+                        resolve(new TokenMeta(result[0], result[1], result[2], result[3], result[4]));
+                    });
+                }));
+                Promise.all(promises).then(infos => {
+                    console.log("All token metadata found.");
+                    this.state.tokens = infos;
+                });
+            });
 		});
 
 	render() {
