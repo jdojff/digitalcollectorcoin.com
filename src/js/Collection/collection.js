@@ -38,8 +38,15 @@ class Collection extends React.Component {
 
     componentDidMount() {
         this._isMounted = true;
+
+        let url = new URL(window.location.href);
+        let address = url.searchParams.get("address");
+        if(!address) {
+            address = web3.eth.accounts[0];
+        }
+
         Promise.all([
-            this.getTokensByAddress(web3.eth.accounts[0]),
+            this.getTokensByAddress(address),
             this.updateState(),
             this.getRegions(),
             // this.getTokenRegions()
