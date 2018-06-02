@@ -33,7 +33,7 @@ class Market extends React.Component {
         }
         const MyContract = web3.eth.contract(abi);
 
-        this.state.ContractInstance = MyContract.at("0x88683a551b2468901139495080308a3d095a085d");
+        this.state.ContractInstance = MyContract.at("0x2eE998d05e7823969b0d5DB2E7ab0D35844A9780");
         window.a = this.state
 	}
 
