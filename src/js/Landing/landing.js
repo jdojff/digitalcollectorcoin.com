@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import InlineSVG from 'svg-inline-react';
 import dccLogo from './../../img/dcclogo.svg';
-import coinGroup from './../../img/coinGroup.svg';
+import header from './../../img/header.svg';
 import metaMaskLogo from './../../img/metamasklogo.svg';
 
 //SCSS
@@ -25,21 +25,9 @@ class Landing extends React.Component {
 		this._isMounted = false;
 	}
 
-	updateState = () =>
-		new Promise((resolve, reject) => {
-			this.state.ContractInstance.tokenURI(101, (err, result) => {
-				if (result !== null && this._isMounted) {
-					let imageSrc = window.atob(result);
-					this.setState({
-						image: imageSrc
-					});
-				}
-			});
-		});
-
 	render() {
 		return (
-			<div className="container-fluid">
+			<div className="container-fluid padding50">
 				<div className="row">
 					<div className="col-lg-6 leftSide">
 						<div className="logo">
@@ -49,7 +37,14 @@ class Landing extends React.Component {
 						<a href="market.html" className="customButton">Dalyvauti</a>
 					</div>
 					<div className="col-lg-6 bg-blue">
-						<InlineSVG src={coinGroup} />
+						<div className="cta">
+							<InlineSVG src={header} />
+							<form>
+								<label>Enter collection address to view it</label>
+								<input />
+								<a href="#" className="customButton">View collection</a>
+							</form>
+						</div>
 					</div>
 				</div>
 				<div className="row bg-grey">
@@ -61,7 +56,7 @@ class Landing extends React.Component {
 						<div className="metaMaskLogo">
 							<InlineSVG src={metaMaskLogo} />
 						</div>
-						<button>Get "MetaMask"</button>
+						<a href="https://metamask.io/" className="customButton" target="_blank">Get "MetaMask"</a>
 					</div>
 				</div>
 				<div className="footer">

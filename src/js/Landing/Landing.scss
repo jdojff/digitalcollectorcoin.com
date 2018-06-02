@@ -19,20 +19,29 @@ body {
 
 .leftSide {
 	padding-top: 100px;
-	padding-left: 165px;
+	padding-left: 85px;
 }
 
 .logo {
-	width: 380px;
+	width: 290px;
 	height: 240px;
 }
 
 .bg-blue {
+	padding-top: 40px;
 	background: #6d6286;
 	background: -moz-linear-gradient(left, #6d6286 0%, #292147 96%, #292147 100%, #2989d8 100%, #207cca 100%, #292147 102%);
 	background: -webkit-linear-gradient(left, #6d6286 0%,#292147 96%,#292147 100%,#2989d8 100%,#207cca 100%,#292147 102%);
 	background: linear-gradient(to right, #6d6286 0%,#292147 96%,#292147 100%,#2989d8 100%,#207cca 100%,#292147 102%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d6286', endColorstr='#292147',GradientType=1 ); /* IE6-9 */
+
+	svg {
+		width: 100%;
+		height: 100%;
+		margin: 0 auto;
+		opacity: .15;
+		margin-top: 50px;
+	}
 }
 
 .bg-grey {
@@ -56,6 +65,7 @@ button {
 	display: inline-block;
 	border-radius: 10px;
 	border: none;
+	margin-bottom: 30px;
 	font-size: 14px;
 	color: #fff;
 	cursor: pointer;
@@ -92,4 +102,43 @@ button {
 		font-size: 14px;
 		color: #9B938A;
 	}
+}
+
+.cta {
+	position: relative;
+	width: 100%;
+	max-width: 460px;
+	margin: 0 auto;
+
+	form {
+		position: absolute;
+		top: 35%;
+		left: 0;
+		text-align: center;
+
+		@media (max-width: 992px) {
+			top: 6%;
+		}
+
+	}
+
+	label {
+		display: inline-block;
+		top: 250px;
+		left: 0;
+		color: #fff;
+		width: 100%;
+		text-align: center;
+		margin-bottom: 40px;
+	}
+
+	input {
+		display: inline-block;
+		border: 0;
+		left: 0;
+		border-radius: 10px;
+		width: 100%;
+		text-align: center;
+	}
+
 }
