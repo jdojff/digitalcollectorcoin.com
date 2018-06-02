@@ -1,5 +1,4 @@
 First, download the current version of node.js from their website nodejs.org if you don’t have nodejs already.
-Then, create a folder called casino-ethereum in your computer’s desktop.
 Inside, open the terminal or command line and execute the command: npm init -y
 
 After that do:
