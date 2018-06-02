@@ -90,8 +90,8 @@ class Collection extends React.Component {
         });
 
     hasToken = name => {
-    	return this.state.tokens.includes(token => token.cityName === name)
-			|| this.state.regions.includes(region => region.name === name && region.children.every(child => this.state.tokens.includes(token => token.name === child.name)));
+    	return !!this.state.tokens.find(token => token.cityName === name)
+			|| !!this.state.regions.find(region => region.name === name && region.children.every(child => !!this.state.tokens.find(token => token.name === child.name)));
 	};
 
 	getTokenRegions = () =>
