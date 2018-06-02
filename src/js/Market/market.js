@@ -23,24 +23,24 @@ class Market extends React.Component {
             ContractInstance: {},
 			tokenRegions: []
         }
-
-        if(typeof web3 != 'undefined'){
-            console.log("Using web3 detected from external source like Metamask")
-            this.web3 = new Web3(web3.currentProvider)
-        }else{
-            console.log("No web3 detected. Falling back to http://localhost:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
-            this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
-        }
-        const MyContract = !!this.web3 ? web3.eth.contract(abi) : null;
-
-        this.state.ContractInstance = MyContract == null ? null : MyContract.at("0xD83D90A35B2F22dbB72a0f56DF04594df42021c1");
+        //
+        // if(typeof web3 != 'undefined'){
+        //     console.log("Using web3 detected from external source like Metamask")
+        //     this.web3 = new Web3(web3.currentProvider)
+        // }else{
+        //     console.log("No web3 detected. Falling back to http://localhost:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
+        //     this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
+        // }
+        // const MyContract = !!this.web3 ? web3.eth.contract(abi) : null;
+        //
+        // this.state.ContractInstance = MyContract == null ? null : MyContract.at("0xD83D90A35B2F22dbB72a0f56DF04594df42021c1");
         window.a = this.state
 	}
 
 	componentDidMount() {
 		this._isMounted = true;
 		Promise.all([
-			this.getTokensByAddress(!!this.web3 ? web3.eth.accounts[0] : null),
+			// this.getTokensByAddress(!!this.web3 ? web3.eth.accounts[0] : null),
 			this.updateState(),
 			this.getRegions(),
 			// this.getTokenRegions()
