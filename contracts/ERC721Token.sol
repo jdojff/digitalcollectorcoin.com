@@ -43,7 +43,6 @@ contract ERC721Token is ERC721, ERC721BasicToken {
     mapping (uint256 => Region) public regions;
     //cityId -> Cities
     mapping (uint256 => City) public cities;
-
     //cityId -> ownedTokensId
     mapping (uint256 => uint256[]) public ownedCities;
 
@@ -61,7 +60,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
         uint256 countryId;
         string countryName;
         string image;
-        Region[] regions;
+        //Region[] regions;
         uint256[] regionIds;
         //helpers
         bool isCreated;
@@ -72,7 +71,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
         uint256 countryId;
         string regionName;
         string image;
-        City[] cities;
+        //City[] cities;
         uint256[] cityIds;
         //helpers
         bool isCreated;
@@ -88,7 +87,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
         bool isCreated;
     }
 
-    function createCountry(uint256 _countryId, string _countryName, string _image) public {
+    function createCountry(uint256 _countryId, string _countryName, string _image) public onlyContractManager {
         Country storage country = countries[_countryId];
 
         if(country.isCreated){
@@ -101,7 +100,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
         country.isCreated = true;
     }
 
-    function createRegion(uint256 _countryId, uint256 _regionId, string _regionName, string _image) public {
+    function createRegion(uint256 _countryId, uint256 _regionId, string _regionName, string _image) public onlyContractManager {
         Country storage country = countries[_countryId];
         if(!country.isCreated){//country doesn't exist
             revert();
@@ -122,7 +121,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
         country.regionIds.push(_regionId);
     }
 
-    function createCity(uint256 _regionId, uint256 _cityId, string _cityName, string _image, uint256 _maxLimit) public {
+    function createCity(uint256 _regionId, uint256 _cityId, string _cityName, string _image, uint256 _maxLimit) public onlyContractManager {
         Region storage region = regions[_regionId];
         if(!region.isCreated){
             revert();
@@ -172,6 +171,10 @@ contract ERC721Token is ERC721, ERC721BasicToken {
 
     function getRegions(uint256 _countryId) public constant returns (uint256[]){
         return countries[_countryId].regionIds;
+    }
+
+    function getCities(uint256 _cityId) public constant returns (uint256[]){
+        return regions[_cityId].cityIds;
     }
 
     function getOwnedTokens(address _address) public constant returns (uint256[]){
@@ -257,7 +260,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
    * @param _tokenId uint256 ID of the token to set its URI
    * @param _uri string URI to assign
    */
-  function setTokenURI(uint256 _tokenId, string _uri) public /*onlyContractManager*/ {
+  function setTokenURI(uint256 _tokenId, string _uri) public onlyContractManager {
     require(exists(_tokenId));
     tokenURIs[_tokenId] = _uri;
   }
@@ -303,7 +306,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
    * @param _to address the beneficiary that will own the minted token
    * @param _tokenId uint256 ID of the token to be minted by the msg.sender
    */
-  function mint(address _to, uint256 _tokenId, string _serialNumber, string _cityName, string _image) public /*onlyContractManager*/ {
+  function mint(address _to, uint256 _tokenId, string _serialNumber, string _cityName, string _image) public onlyContractManager {
     super._mint(_to, _tokenId);
 
     allTokensIndex[_tokenId] = allTokens.length;
@@ -319,7 +322,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
     coinInfo.image = _image;
   }
 
-    function mint2(address _to, uint256 _tokenId, string _serialNumber, uint256 _cityId) public {
+    function mint2(address _to, uint256 _tokenId, string _serialNumber, uint256 _cityId) public onlyContractManager {
         super._mint(_to, _tokenId);
 
         allTokensIndex[_tokenId] = allTokens.length;
