@@ -72,7 +72,9 @@ class Market extends React.Component {
             let promises = result.map(id => new Promise((resolve, reject) => {
                 console.log("Searching meta info for id " + id);
                 this.state.ContractInstance.metaInfos(id, (err, result) => {
-                    resolve(new TokenMeta(result[0], result[1], result[2], result[3], result[4]));
+                    let meta = new TokenMeta(result[0], result[1], result[2], result[3], result[4]);
+                    console.log(meta);
+                    resolve(meta);
                 });
             }));
             Promise.all(promises).then(infos => {
