@@ -17,6 +17,7 @@
     "babel-loader": "^7.1.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "bignumber.js": "git+https://github.com/frozeman/bignumber.js-nolookahead.git",
     "bootstrap": "^4.1.1",
     "css-loader": "^0.28.11",
     "http-server": "^0.11.1",
