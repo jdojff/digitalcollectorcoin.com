@@ -14,9 +14,9 @@ module.exports = {
 		libraryExport: 'default',
 		sourceMapFilename: 'bundle.js.map'
 	},
+	devtool: 'eval-cheap-module-source-map',
 	module: {
-		loaders: [
-			{
+		loaders: [{
 				test: /\.css$/,
 				use: ['style-loader', 'css-loader'],
 				include: /src/
@@ -26,37 +26,40 @@ module.exports = {
 				loader: 'babel-loader',
 				exclude: /node_modules/,
 				query: {
-					presets: ['es2015', 'react', 'stage-2']
+					presets: ['env', 'react', 'stage-2']
 				}
 			},
 			{
-         		test: /\.json$/, // To load the json files
-         		loader: 'json-loader'
-      		},
+				test: /\.json$/, // To load the json files
+				loader: 'json-loader'
+			},
 			{
-		  		test: /\.(scss)$/,
-		  		use: [
-			  		{
-				  		loader: 'style-loader'
-			  		},
+				test: /\.(scss)$/,
+				use: [{
+						loader: 'style-loader'
+					},
 					{
-				  		loader: 'css-loader'
-			 	 	},
-			  		{
+						loader: 'css-loader'
+					},
+					{
 						loader: 'postcss-loader',
-				  		options: {
-					  		plugins: function () {
-						  		return [
-							  		require('autoprefixer')
-						  		];
-					  		}
-				  		}
-			  		},
-			  		{
+						options: {
+							plugins: function() {
+								return [
+									require('autoprefixer')
+								];
+							}
+						}
+					},
+					{
 						loader: 'sass-loader'
-			  		}
-		  		]
-	  		}
+					}
+				]
+			},
+			{
+				test: /\.svg$/,
+				loader: 'svg-inline-loader'
+			}
 		]
 	}
 }
