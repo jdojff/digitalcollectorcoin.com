@@ -21,6 +21,7 @@ class Market extends React.Component {
         this.state = {
             tokens: [],
             ContractInstance: {},
+			tokenRegions: []
         }
 
         if(typeof web3 != 'undefined'){
@@ -32,7 +33,7 @@ class Market extends React.Component {
         }
         const MyContract = web3.eth.contract(abi);
 
-        this.state.ContractInstance = MyContract.at("0x1545ab27fdadf6c57fefa3bbd0f7ed0a981ee01d");
+        this.state.ContractInstance = MyContract.at("0x88683a551b2468901139495080308a3d095a085d");
         window.a = this.state
 	}
 
@@ -79,6 +80,14 @@ class Market extends React.Component {
                 this.state.tokens = infos;
             });
         });
+
+	getTokenRegions = () =>
+		new Promise((resolve, reject) => {
+			const lithuaniaId = 1;
+			this.state.ContractInstance.countries(lithuaniaId, (err, result) => {
+				this.state.tokenRegions = result.regions;
+			});
+		});
 
 	getRegions = () => {
 		if (this._isMounted) {
