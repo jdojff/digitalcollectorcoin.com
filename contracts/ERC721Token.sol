@@ -68,6 +68,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
 
     struct Region {
         uint256 regionId;
+        uint256 countryId;
         string regionName;
         string image;
         City[] cities;
@@ -77,6 +78,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
 
     struct City {
         uint256 cityId;
+        uint256 regionId;
         string cityName;
         string image;
         uint256 maxLimit;
@@ -108,6 +110,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
         }
 
         region.regionId = _regionId;
+        region.countryId = _countryId;
         region.regionName = _regionName;
         region.image = _image;
         region.isCreated = true;
@@ -128,6 +131,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
         }
 
         city.cityId = _cityId;
+        city.regionId = _regionId;
         city.cityName = _cityName;
         city.image = _image;
         city.maxLimit = _maxLimit;
