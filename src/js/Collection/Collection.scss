@@ -7,6 +7,16 @@ body {
 	font-family: 'Montserrat', sans-serif;
 }
 
+
+.np {
+	padding: 0 !important;
+}
+
+nm {
+	margin: 0 !important;
+}
+
+
 .sidebar {
 	padding-top: 70px;
 	padding-left: 60px;
@@ -49,6 +59,7 @@ body {
 	background: -webkit-linear-gradient(left, #6d6286 0%,#292147 96%,#292147 100%,#2989d8 100%,#207cca 100%,#292147 102%);
 	background: linear-gradient(to right, #6d6286 0%,#292147 96%,#292147 100%,#2989d8 100%,#207cca 100%,#292147 102%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d6286', endColorstr='#292147',GradientType=1 ); /* IE6-9 */
+	padding-bottom: 100px;
 
 	ul {
 		padding: 0;
@@ -98,6 +109,8 @@ body {
 			text-align: center;
 			font-size: 24px;
 			color: #fff;
+			max-width: 150px;
+			margin: 0 auto;
 		}
 
 		.price {
@@ -133,4 +146,39 @@ h4 {
 	padding-left: 100px;
 	padding-top: 60px;
 	font-size: 30px;
+}
+
+.achievments {
+	padding: 40px 0;
+	text-align: center;
+	background: #292147; /* Old browsers */
+	background: -moz-linear-gradient(45deg, #292147 0%, #6d6286 100%, #7db9e8 100%, #292147 100%, #2989d8 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(45deg, #292147 0%,#6d6286 100%,#7db9e8 100%,#292147 100%,#2989d8 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(45deg, #292147 0%,#6d6286 100%,#7db9e8 100%,#292147 100%,#2989d8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#292147', endColorstr='#2989d8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+	.achievment {
+		display: inline-block;
+		text-align: center;
+
+		.iconAchievment {
+			min-height: 140px;
+			vertical-align: middle;
+			opacity: .4;
+			transition: $tr_fast;
+		}
+		.achievmentName {
+			color: #fff;
+			opacity: .4;
+			transition: $tr_fast;
+		}
+
+		&:hover {
+			.iconAchievment,
+			.achievmentName {
+				opacity: 1;
+			}
+		}
+
+	}
 }
