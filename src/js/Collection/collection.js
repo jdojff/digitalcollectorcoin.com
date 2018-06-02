@@ -35,7 +35,7 @@ class Collection extends React.Component {
 
 	componentDidMount() {
 		this._isMounted = true;
-		Promise.all([this.updateState()]).then(() => {
+		Promise.all([this.updateState(), this.getTokenRegions(), this.getRegions()]).then(() => {
 
 		});
 	}
@@ -66,11 +66,36 @@ class Collection extends React.Component {
             });
 		});
 
+	getTokenRegions = () =>
+		new Promise((resolve, reject) => {
+			const lithuaniaId = 1;
+			this.state.ContractInstance.countries(lithuaniaId, (err, result) => {
+				this.state.tokenRegions = result.regions;
+			});
+		});
+
+	getRegions = () => {
+		if (this._isMounted) {
+			let regions = Regions.regions.map(region => Object({
+				name: region.name,
+				children: region.children,
+				imageFull: window.atob(region.imageFull),
+				imagePlaceholder: window.atob(region.imagePlaceholder)
+			}));
+			let cities = Regions.cities.map(city => Object({
+				name: city.name,
+				imageFull: window.atob(city.imageFull),
+				imagePlaceholder: window.atob(city.imagePlaceholder)
+			}));
+			this.setState({regions: regions, cities: cities})
+		}
+	};
+
 	render() {
 		return (
 			<div className="container-fluid bg-blue">
-				<div className="row">
-					<div className="col-lg-3 bg-white">
+				<div className="row nm">
+					<div className="col-lg-3 np bg-white">
 						<div className="sidebar">
 							<div className="logo">
 								<InlineSVG src={dccLogo}/>
@@ -90,7 +115,7 @@ class Collection extends React.Component {
 							</ul>
 						</div>
 					</div>
-					<div className="col-lg-9">
+					<div className="col-lg-9 np">
 						<div className="dashboard">
 							<h4>Marketplace</h4>
 							<ul>
@@ -110,6 +135,63 @@ class Collection extends React.Component {
 									</a>
 								</li>
 							</ul>
+							<div className="achievments">
+								<div className="container">
+									<div className="row">
+										<div className="col-lg-1"></div>
+										<div className="col-lg-2">
+											<div className="achievment">
+												<div className="iconAchievment">
+													<InlineSVG src={coin} />
+												</div>
+												<div className="achievmentName">
+													Aukštaitija
+												</div>
+											</div>
+										</div>
+										<div className="col-lg-2">
+											<div className="achievment">
+												<div className="iconAchievment">
+													<InlineSVG src={coin} />
+												</div>
+												<div className="achievmentName">
+													Aukštaitija
+												</div>
+											</div>
+										</div>
+										<div className="col-lg-2">
+											<div className="achievment">
+												<div className="iconAchievment">
+													<InlineSVG src={coin} />
+												</div>
+												<div className="achievmentName">
+													Aukštaitija
+												</div>
+											</div>
+										</div>
+										<div className="col-lg-2">
+											<div className="achievment">
+												<div className="iconAchievment">
+													<InlineSVG src={coin} />
+												</div>
+												<div className="achievmentName">
+													Aukštaitija
+												</div>
+											</div>
+										</div>
+										<div className="col-lg-2">
+											<div className="achievment">
+												<div className="iconAchievment">
+													<InlineSVG src={coin} />
+												</div>
+												<div className="achievmentName">
+													Aukštaitija
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 							<div className="market">
 								<div className="row">
 									<div className="col-lg-3 col-md-4">
