@@ -1,0 +1,136 @@
+// TRANSITIONS
+$tr_fast: all 0.2s ease;
+$tr_default: all 0.3s ease;
+$tr_slow: all 0.6s ease;
+
+body {
+	font-family: 'Montserrat', sans-serif;
+}
+
+.sidebar {
+	padding-top: 70px;
+	padding-left: 60px;
+
+	&.bg-white {
+		background-color: #fff;
+	}
+
+	.logo {
+		width: 227px;
+		height: 145px;
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		margin-top: 60px;
+
+		li {
+			display: block;
+			a {
+				font-size: 14px;
+				color: #685D82 !important;
+				cursor: pointer;
+				font-weight: 700;
+				text-transform: uppercase;
+				display: inline-block;
+			}
+		}
+	}
+}
+
+
+
+.dashboard {
+	min-height: 100vh;
+	background: #6d6286;
+	background: -moz-linear-gradient(left, #6d6286 0%, #292147 96%, #292147 100%, #2989d8 100%, #207cca 100%, #292147 102%);
+	background: -webkit-linear-gradient(left, #6d6286 0%,#292147 96%,#292147 100%,#2989d8 100%,#207cca 100%,#292147 102%);
+	background: linear-gradient(to right, #6d6286 0%,#292147 96%,#292147 100%,#2989d8 100%,#207cca 100%,#292147 102%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d6286', endColorstr='#292147',GradientType=1 ); /* IE6-9 */
+
+	ul {
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		padding-left: 100px;
+		margin-top: 30px;
+
+		li {
+			display: inline-block;
+			margin-right: 15px;
+
+			&:last-child {
+				margin-right: 0;
+			}
+
+			a {
+				display: inline-block;
+				font-weight: 700;
+				color: #fff !important;
+				font-size: 14px;
+				opacity: .5;
+				transition: $tr_fast;
+				cursor: pointer;
+
+				&:hover,
+				&.active {
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+	.coinBox {
+		margin-top: 25px;
+		text-align: center;
+
+		.iconContainer {
+			svg {
+				width: 175px;
+				height: 175px;
+				margin: 0 auto;
+			}
+		}
+
+		.desc {
+			text-align: center;
+			font-size: 24px;
+			color: #fff;
+		}
+
+		.price {
+			color: #CB9E62;
+			font-size: 35px;
+			font-weight: 500;
+			text-align: center;
+			font-family: 'Rozha One', serif;
+		}
+
+		.buyButton {
+			text-align: center;
+			margin: 0 auto;
+			color: #CB9E62;
+			cursor: pointer;
+			font-size: 14px;
+			border-radius: 10px;
+			border: 1px solid #CB9E62;
+			padding: 5px 25px;
+			transition: $tr_fast;
+			text-transform: uppercase;
+
+			&:hover {
+				color: #fff;
+				border-color: #fff;
+			}
+		}
+	}
+}
+
+h4 {
+	color: #fff;
+	padding-left: 100px;
+	padding-top: 60px;
+	font-size: 30px;
+}

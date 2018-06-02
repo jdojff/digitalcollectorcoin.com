@@ -10,11 +10,10 @@
 // import 'babel-polyfill'; // Needs to be at the top
 import 'jquery';
 import 'bootstrap';
-import './../scss/app.scss';
 
 // GLOBALS
-import Landing from './landing';
-import Market from './market'
+import Landing from './Landing/landing';
+import Market from './Market/market';
 
 
 

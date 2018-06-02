@@ -1,0 +1,95 @@
+@import '~bootstrap/scss/bootstrap';
+
+// TRANSITIONS
+$tr_fast: all 0.2s ease;
+$tr_default: all 0.3s ease;
+$tr_slow: all 0.6s ease;
+
+
+* {
+	outline: 0 !important;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	font-size: 22px;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.leftSide {
+	padding-top: 100px;
+	padding-left: 165px;
+}
+
+.logo {
+	width: 380px;
+	height: 240px;
+}
+
+.bg-blue {
+	background: #6d6286;
+	background: -moz-linear-gradient(left, #6d6286 0%, #292147 96%, #292147 100%, #2989d8 100%, #207cca 100%, #292147 102%);
+	background: -webkit-linear-gradient(left, #6d6286 0%,#292147 96%,#292147 100%,#2989d8 100%,#207cca 100%,#292147 102%);
+	background: linear-gradient(to right, #6d6286 0%,#292147 96%,#292147 100%,#2989d8 100%,#207cca 100%,#292147 102%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d6286', endColorstr='#292147',GradientType=1 ); /* IE6-9 */
+}
+
+.bg-grey {
+	background-color: #FBF7F3;
+	padding-bottom: 80px;
+}
+
+h3 {
+	color: #31294F;
+	font-size: 50px;
+}
+
+p {
+	margin-top: 60px;
+	font-size: 34px;
+}
+
+.customButton,
+button {
+	margin-top: 60px;
+	display: inline-block;
+	border-radius: 10px;
+	border: none;
+	font-size: 14px;
+	color: #fff;
+	cursor: pointer;
+	background-color: #CB9E62;
+	padding: 20px 65px;
+	text-transform: uppercase;
+	font-weight: 700;
+	transition: $tr_fast;
+
+	&:hover {
+		text-decoration: none;
+		color: #fff;
+		background-color: lighten(#CB9E62, 15%);
+	}
+}
+
+.fz22 {
+	font-size: 22px;
+}
+
+.metaMaskLogo {
+	width: 276px;
+	height: 252px;
+	text-align: center;
+	margin: 170px auto 0 auto;
+}
+
+.tac {
+	text-align: center;
+}
+
+.footer {
+	p {
+		font-size: 14px;
+		color: #9B938A;
+	}
+}

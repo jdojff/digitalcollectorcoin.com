@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import InlineSVG from 'svg-inline-react';
-import dccLogo from './../img/dcclogo.svg';
-import coinGroup from './../img/coinGroup.svg';
-import metaMaskLogo from './../img/metamasklogo.svg';
+import dccLogo from './../../img/dcclogo.svg';
+import coinGroup from './../../img/coinGroup.svg';
+import metaMaskLogo from './../../img/metamasklogo.svg';
+
+//SCSS
+import './Landing.scss';
 
 class Landing extends React.Component {
 	_isMounted = false;

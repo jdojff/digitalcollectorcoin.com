@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Web3 from 'web3';
 import InlineSVG from 'svg-inline-react';
-import dccLogo from './../img/dcclogo.svg';
-import coinGroup from './../img/coinGroup.svg';
-import metaMaskLogo from './../img/metamasklogo.svg';
-import './../scss/app.scss';
+import dccLogo from './../../img/dcclogo.svg';
+import coin from './../../img/coin10.svg';
+
+//SCSS
+import './Market.scss';
 
 class Market extends React.Component {
 	_isMounted = false;
@@ -477,35 +478,126 @@ class Market extends React.Component {
 
 	render() {
 		return (
-			<div className="container-fluid">
+			<div className="container-fluid bg-blue">
 				<div className="row">
-					<div className="col-lg-6 leftSide">
-						<div className="logo">
-							<InlineSVG src={dccLogo} />
+					<div className="col-lg-3 bg-white">
+						<div className="sidebar">
+							<div className="logo">
+								<InlineSVG src={dccLogo}/>
+							</div>
+							<ul>
+								<li>
+									<a>
+										Marketplace
+									</a>
+								</li>
+								<li>
+									<a>
+										Your collection
+									</a>
+								</li>
+								<li>
+									<a>
+										Wishlist
+									</a>
+								</li>
+							</ul>
 						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
-						<button>Dalyvauti</button>
 					</div>
-					<div className="col-lg-6 bg-blue">
-						<InlineSVG src={coinGroup} />
-					</div>
-				</div>
-				<div className="row bg-grey">
-					<div className="col-lg-6 leftSide">
-						<h3>HOW TO BECOME A DIGITAL COLLECTOR</h3>
-						<p className="fz22">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-					</div>
-					<div className="col-lg-6 tac">
-						<div className="metaMaskLogo">
-							<InlineSVG src={metaMaskLogo} />
-						</div>
-						<button>Get "MetaMask"</button>
-					</div>
-				</div>
-				<div className="footer">
-					<div className="row bg-grey">
-						<div className="col-xs-12 leftSide">
-							<p>2018 Copyright</p>
+					<div className="col-lg-9">
+						<div className="dashboard">
+							<h4>Marketplace</h4>
+							<ul>
+								<li>
+									<a className="active">
+										All Coins
+									</a>
+								</li>
+								<li>
+									<a>
+										City Coins
+									</a>
+								</li>
+								<li>
+									<a>
+										Region Coins
+									</a>
+								</li>
+							</ul>
+							<div className="market">
+								<div className="row">
+									<div className="col-lg-3 col-md-4">
+										<div className="coinBox">
+											<div className="iconContainer">
+												<InlineSVG src={coin} />
+											</div>
+											<div className="desc">
+												Monetos pavadinimas
+											</div>
+											<div className="price">
+												50 Eur
+											</div>
+											<a className="buyButton">Buy</a>
+										</div>
+									</div>
+									<div className="col-lg-3 col-md-4">
+										<div className="coinBox">
+											<div className="iconContainer">
+												<InlineSVG src={coin} />
+											</div>
+											<div className="desc">
+												Monetos pavadinimas
+											</div>
+											<div className="price">
+												50 Eur
+											</div>
+											<a className="buyButton">Buy</a>
+										</div>
+									</div>
+									<div className="col-lg-3 col-md-4">
+										<div className="coinBox">
+											<div className="iconContainer">
+												<InlineSVG src={coin} />
+											</div>
+											<div className="desc">
+												Monetos pavadinimas
+											</div>
+											<div className="price">
+												50 Eur
+											</div>
+											<a className="buyButton">Buy</a>
+										</div>
+									</div>
+									<div className="col-lg-3 col-md-4">
+										<div className="coinBox">
+											<div className="iconContainer">
+												<InlineSVG src={coin} />
+											</div>
+											<div className="desc">
+												Monetos pavadinimas
+											</div>
+											<div className="price">
+												50 Eur
+											</div>
+											<a className="buyButton">Buy</a>
+										</div>
+									</div>
+									<div className="col-lg-3 col-md-4">
+										<div className="coinBox">
+											<div className="iconContainer">
+												<InlineSVG src={coin} />
+											</div>
+											<div className="desc">
+												Monetos pavadinimas
+											</div>
+											<div className="price">
+												50 Eur
+											</div>
+											<a className="buyButton">Buy</a>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
