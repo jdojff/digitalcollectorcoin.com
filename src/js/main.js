@@ -10,15 +10,18 @@
 // import 'babel-polyfill'; // Needs to be at the top
 import 'jquery';
 import 'bootstrap';
+import './../scss/app.scss';
 
 // GLOBALS
-import index from './index';
+import Landing from './landing';
+import Market from './market'
 
 
 
 export default {
 	// GLOBALS
-	index
+	Landing,
+	Market
 
 	// PUBLIC PAGES
 	// index: (...args) =>

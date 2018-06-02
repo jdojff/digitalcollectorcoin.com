@@ -1,81 +1,91 @@
 @import '~bootstrap/scss/bootstrap';
 @import 'variables.scss';
 
+// TRANSITIONS
+$tr_fast: all 0.2s ease;
+$tr_default: all 0.3s ease;
+$tr_slow: all 0.6s ease;
+
+
 * {
-  outline: 0 !important;
+	outline: 0 !important;
 }
 
 body {
-  font-size: 24pt;
+	padding: 0;
+	margin: 0;
+	font-size: 22px;
 }
 
-header {
-  background-color: $light_grey;
-  height: 80vh;
-  color: $dark_grey;
+.leftSide {
+	padding-top: 100px;
+	padding-left: 165px;
 }
 
-h2 {
-  font-size: 40pt;
-  span {
-	display: block;
-  }
+.logo {
+	width: 380px;
+	height: 240px;
 }
 
-.vtable {
-  display: table;
-  width: 100%;
-  height: 80vh;
-  text-align: center;
-  table-layout: fixed;
+.bg-blue {
+	background: #6d6286;
+	background: -moz-linear-gradient(left, #6d6286 0%, #292147 96%, #292147 100%, #2989d8 100%, #207cca 100%, #292147 102%);
+	background: -webkit-linear-gradient(left, #6d6286 0%,#292147 96%,#292147 100%,#2989d8 100%,#207cca 100%,#292147 102%);
+	background: linear-gradient(to right, #6d6286 0%,#292147 96%,#292147 100%,#2989d8 100%,#207cca 100%,#292147 102%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6d6286', endColorstr='#292147',GradientType=1 ); /* IE6-9 */
 }
 
-.vcell {
-  display: table-cell;
-  vertical-align: middle;
+.bg-grey {
+	background-color: #FBF7F3;
+	padding-bottom: 80px;
 }
 
-
-
-form {
-  &.cta {
-	label,
-	input,
-	button {
-	  display: block;
-	  text-align: center;
-	  margin: 24pt auto 0 auto;
-	}
-  }
+h3 {
+	color: #31294F;
+	font-size: 50px;
 }
 
-input {
-  border: 0;
-  background-color: transparent;
-  min-width: 500px;
-  border-bottom: 2px solid lighten($dark_grey, 15%);
-  font-size: 30pt;
-  transition: $tr_fast;
-
-  &:focus {
-	border-color: $dark_grey;
-  }
+p {
+	margin-top: 60px;
+	font-size: 34px;
 }
 
 button {
-  margin-top: 24pt;
-  background-color: $main_red;
-  color: $white;
-  cursor: pointer;
-  border-radius: 40px;
-  padding: 25px 70px;
-  box-shadow: none;
-  font-size: 14pt;
-  border: 0;
-  transition: $tr_fast;
+	margin-top: 60px;
+	border-radius: 10px;
+	border: none;
+	font-size: 14px;
+	color: #fff;
+	cursor: pointer;
+	background-color: #CB9E62;
+	padding: 20px 65px;
+	text-transform: uppercase;
+	font-weight: 700;
+	transition: $tr_fast;
 
-  &:hover {
-	background-color: $main_red_hover;
-  }
+	&:hover {
+		background-color: lighten(#CB9E62, 15%);
+	}
 }
 
+.fz22 {
+	font-size: 22px;
+}
+
+.metaMaskLogo {
+	width: 276px;
+	height: 252px;
+	text-align: center;
+	margin: 170px auto 0 auto;
+}
+
+.tac {
+	text-align: center;
+}
+
+.footer {
+	p {
+		font-size: 14px;
+		color: #9B938A;
+	}
+}
