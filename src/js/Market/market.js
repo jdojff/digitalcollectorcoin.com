@@ -7,6 +7,9 @@ import coin from './../../img/coin10.svg'
 import TokenMeta from "../TokenMeta";
 import abi from "../abi";
 
+//data
+import Regions from './../regions.json';
+
 //SCSS
 import './Market.scss';
 
@@ -37,7 +40,8 @@ class Market extends React.Component {
 		this._isMounted = true;
 		Promise.all([
 			this.getTokensByAddress(web3.eth.accounts[0]),
-			this.updateState()
+			this.updateState(),
+			this.getRegions()
 		]).then(() => {
 
 		});
@@ -52,7 +56,7 @@ class Market extends React.Component {
 
 		});
 
-	getTokensByAddress = (address) =>
+	getTokensByAddress = address =>
         new Promise((resolve, reject) => {
         	if(!address) {
         		resolve([]);
@@ -76,11 +80,29 @@ class Market extends React.Component {
             });
         });
 
+	getRegions = () => {
+		if (this._isMounted) {
+			let regions = Regions.regions.map(region => Object({
+				name: region.name,
+				children: region.children,
+				imageFull: window.atob(region.imageFull),
+				imagePlaceholder: window.atob(region.imagePlaceholder)
+			}));
+			let cities = Regions.cities.map(city => Object({
+				name: city.name,
+				imageFull: window.atob(city.imageFull),
+				imagePlaceholder: window.atob(city.imagePlaceholder)
+			}));
+			this.setState({regions: regions, cities: cities})
+		}
+	};
+
 	render() {
-		return (
-			<div className="container-fluid bg-blue">
-				<div className="row">
-					<div className="col-lg-3 bg-white">
+
+		if (this._isMounted) {
+			return (<div className="container-fluid bg-blue">
+				<div className="row nm">
+					<div className="col-lg-3 np bg-white">
 						<div className="sidebar">
 							<div className="logo">
 								<InlineSVG src={dccLogo}/>
@@ -90,7 +112,7 @@ class Market extends React.Component {
 									<a href="market.html">Marketplace</a>
 								</li>
 								<li>
-								    <a href="collection.html">Your collection</a>
+									<a href="collection.html">Your collection</a>
 								</li>
 								<li>
 									<a>
@@ -100,96 +122,291 @@ class Market extends React.Component {
 							</ul>
 						</div>
 					</div>
-					<div className="col-lg-9">
+					<div className="col-lg-9 np">
 						<div className="dashboard">
 							<h4>Marketplace</h4>
-							<ul>
-								<li>
-									<a className="active">
-										All Coins
-									</a>
-								</li>
-								<li>
-									<a>
-										City Coins
-									</a>
-								</li>
-								<li>
-									<a>
-										Region Coins
-									</a>
-								</li>
-							</ul>
 							<div className="market">
-								<div className="row">
-									<div className="col-lg-3 col-md-4">
-										<div className="coinBox">
-											<div className="iconContainer">
-												<InlineSVG src={coin} />
+								<div className="container">
+									<div className="row">
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[0].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[0].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
 											</div>
-											<div className="desc">
-												Monetos pavadinimas
-											</div>
-											<div className="price">
-												50 Eur
-											</div>
-											<a className="buyButton">Buy</a>
 										</div>
-									</div>
-									<div className="col-lg-3 col-md-4">
-										<div className="coinBox">
-											<div className="iconContainer">
-												<InlineSVG src={coin} />
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[1].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[1].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
 											</div>
-											<div className="desc">
-												Monetos pavadinimas
-											</div>
-											<div className="price">
-												50 Eur
-											</div>
-											<a className="buyButton">Buy</a>
 										</div>
-									</div>
-									<div className="col-lg-3 col-md-4">
-										<div className="coinBox">
-											<div className="iconContainer">
-												<InlineSVG src={coin} />
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[2].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[2].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
 											</div>
-											<div className="desc">
-												Monetos pavadinimas
-											</div>
-											<div className="price">
-												50 Eur
-											</div>
-											<a className="buyButton">Buy</a>
 										</div>
-									</div>
-									<div className="col-lg-3 col-md-4">
-										<div className="coinBox">
-											<div className="iconContainer">
-												<InlineSVG src={coin} />
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[3].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[3].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
 											</div>
-											<div className="desc">
-												Monetos pavadinimas
-											</div>
-											<div className="price">
-												50 Eur
-											</div>
-											<a className="buyButton">Buy</a>
 										</div>
-									</div>
-									<div className="col-lg-3 col-md-4">
-										<div className="coinBox">
-											<div className="iconContainer">
-												<InlineSVG src={coin} />
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[4].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[4].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
 											</div>
-											<div className="desc">
-												Monetos pavadinimas
+										</div>
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[0].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[0].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
 											</div>
-											<div className="price">
-												50 Eur
+										</div>
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[1].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[1].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
 											</div>
-											<a className="buyButton">Buy</a>
+										</div>
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[2].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[2].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
+											</div>
+										</div>
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[3].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[3].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
+											</div>
+										</div>
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[4].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[4].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
+											</div>
+										</div>
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[0].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[0].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
+											</div>
+										</div>
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[1].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[1].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
+											</div>
+										</div>
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[2].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[2].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
+											</div>
+										</div>
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[3].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[3].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
+											</div>
+										</div>
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[4].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[4].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
+											</div>
+										</div>
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[0].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[0].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
+											</div>
+										</div>
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[1].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[1].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
+											</div>
+										</div>
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[2].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[2].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
+											</div>
+										</div>
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[3].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[3].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
+											</div>
+										</div>
+										<div className="col-lg-3 col-md-4">
+											<div className="coinBox">
+												<div className="iconContainer">
+													<InlineSVG src={this.state.cities[4].imageFull}/>
+												</div>
+												<div className="desc">
+													{this.state.cities[4].name}
+												</div>
+												<div className="price">
+													50 Eur
+												</div>
+												<a className="buyButton">Buy</a>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -197,11 +414,12 @@ class Market extends React.Component {
 						</div>
 					</div>
 				</div>
-			</div>
-		)
+			</div>)
+		}
+		return null;
 	}
 }
 
 export default() => {
-	ReactDOM.render(<Market />, document.querySelector('#root'))
+	ReactDOM.render(<Market/>, document.querySelector('#root'))
 }
