@@ -77,15 +77,11 @@ class Collection extends React.Component {
 							</div>
 							<ul>
 								<li>
-									<a>
-										Marketplace
-									</a>
-								</li>
-								<li>
-									<a>
-										Your collection
-									</a>
-								</li>
+                                    <a href="market.html">Marketplace</a>
+                                </li>
+                                <li>
+                                    <a href="collection.html">Your collection</a>
+                                </li>
 								<li>
 									<a>
 										Wishlist

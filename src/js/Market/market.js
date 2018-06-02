@@ -77,9 +77,7 @@ class Market extends React.Component {
 							</div>
 							<ul>
 								<li>
-									<a>
-										Marketplace
-									</a>
+									<a href="market.html">Marketplace</a>
 								</li>
 								<li>
 								    <a href="collection.html">Your collection</a>
