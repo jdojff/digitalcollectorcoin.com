@@ -7,6 +7,9 @@ import coin from './../../img/coin10.svg'
 import TokenMeta from "../TokenMeta";
 import abi from "../abi";
 
+//DATA
+import Regions from './../regions.json';
+
 //SCSS
 import './Collection.scss';
 
@@ -33,38 +36,58 @@ class Collection extends React.Component {
         window.a = this.state
 	}
 
-	componentDidMount() {
-		this._isMounted = true;
-		Promise.all([this.updateState(), this.getTokenRegions(), this.getRegions()]).then(() => {
-
-		});
-	}
+    componentDidMount() {
+        this._isMounted = true;
+        Promise.all([
+            this.getTokensByAddress(web3.eth.accounts[0]),
+            this.updateState(),
+            this.getRegions(),
+            // this.getTokenRegions()
+        ]).then(() => {
+        	
+        });
+    }
 
 	componentWillUnmount() {
 		this._isMounted = false;
 	}
 
-	updateState = () =>
-		new Promise((resolve, reject) => {
-            new Promise((resolve, reject) => {
-                this.state.ContractInstance.getOwnedTokens("0x1245bd304ed9c70c1b7a89f7619e7e53a78850bd", (err, result) => {
-                    console.log("Owned token ids: " + result);
-                    resolve(result);
-                });
-            }).then((result) => {
-                if(result == null) return;
-                let promises = result.map(id => new Promise((resolve, reject) => {
-                    console.log("Searching meta info for id " + id);
-                    this.state.ContractInstance.metaInfos(id, (err, result) => {
-                        resolve(new TokenMeta(result[0], result[1], result[2], result[3], result[4]));
-                    });
-                }));
-                Promise.all(promises).then(infos => {
-                    console.log("All token metadata found.");
-                    this.state.tokens = infos;
-                });
+    getTokensByAddress = address =>
+        new Promise((resolve, reject) => {
+            if(!address) {
+                resolve([]);
+                return;
+            }
+            this.state.ContractInstance.getOwnedTokens(address, (err, result) => {
+                console.log("Owned token ids: " + result);
+                resolve(result);
             });
-		});
+        }).then((result) => {
+            if(result == null) return;
+            let promises = result.map(id => new Promise((resolve, reject) => {
+                console.log("Searching meta info for id " + id);
+                this.state.ContractInstance.metaInfos(id, (err, result) => {
+                    let meta = new TokenMeta(result[0], result[1], result[2], result[3], result[4]);
+                    console.log(meta);
+                    resolve(meta);
+                });
+            }));
+            Promise.all(promises).then(infos => {
+                console.log("All token metadata found.");
+                this.setState({tokens: infos});
+                this.setState({image: window.atob(infos[1].image)});
+            });
+        });
+
+    updateState = () =>
+        new Promise((resolve, reject) => {
+
+        });
+
+    hasToken = name => {
+    	return this.state.tokens.includes(token => token.cityName === name)
+			|| this.state.regions.includes(region => region.name === name && region.children.every(child => this.state.tokens.includes(token => token.name === child.name)));
+	};
 
 	getTokenRegions = () =>
 		new Promise((resolve, reject) => {
@@ -87,7 +110,8 @@ class Collection extends React.Component {
 				imageFull: window.atob(city.imageFull),
 				imagePlaceholder: window.atob(city.imagePlaceholder)
 			}));
-			this.setState({regions: regions, cities: cities})
+			this.setState({regions: regions, cities: cities});
+			console.log("done");
 		}
 	};
 
