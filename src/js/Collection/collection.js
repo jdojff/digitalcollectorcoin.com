@@ -48,8 +48,7 @@ class Collection extends React.Component {
         Promise.all([
             this.getTokensByAddress(address),
             this.updateState(),
-            this.getRegions(),
-            // this.getTokenRegions()
+            this.getRegions()
         ]).then(() => {
 
         });
@@ -221,7 +220,11 @@ class Collection extends React.Component {
 											<div className="col-lg-3 col-md-4">
 												<div className="coinBox">
 													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[0].imagePlaceholder}/>
+														{this.hasToken(this.state.cities[0].name) ? (
+															<InlineSVG src={this.state.cities[0].imageFull}/>
+														) : (
+															<InlineSVG src={this.state.cities[0].imagePlaceholder}/>
+														)}
 													</div>
 													<div className="desc">
 														{this.state.cities[0].name}
@@ -235,7 +238,11 @@ class Collection extends React.Component {
 											<div className="col-lg-3 col-md-4">
 												<div className="coinBox">
 													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[1].imagePlaceholder}/>
+														{this.hasToken(this.state.cities[1].name) ? (
+															<InlineSVG src={this.state.cities[1].imageFull}/>
+														) : (
+															<InlineSVG src={this.state.cities[1].imagePlaceholder}/>
+														)}
 													</div>
 													<div className="desc">
 														{this.state.cities[1].name}
