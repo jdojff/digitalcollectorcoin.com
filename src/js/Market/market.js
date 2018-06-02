@@ -35,7 +35,10 @@ class Market extends React.Component {
 
 	componentDidMount() {
 		this._isMounted = true;
-		Promise.all([this.updateState()]).then(() => {
+		Promise.all([
+			this.getTokensByAddress(web3.eth.accounts[0]),
+			this.updateState()
+		]).then(() => {
 
 		});
 	}
@@ -46,25 +49,32 @@ class Market extends React.Component {
 
 	updateState = () =>
 		new Promise((resolve, reject) => {
-            new Promise((resolve, reject) => {
-                this.state.ContractInstance.getOwnedTokens("0x1245bd304ed9c70c1b7a89f7619e7e53a78850bd", (err, result) => {
-                    console.log("Owned token ids: " + result);
-                    resolve(result);
-                });
-            }).then((result) => {
-                if(result == null) return;
-                let promises = result.map(id => new Promise((resolve, reject) => {
-                    console.log("Searching meta info for id " + id);
-                    this.state.ContractInstance.metaInfos(id, (err, result) => {
-                        resolve(new TokenMeta(result[0], result[1], result[2], result[3], result[4]));
-                    });
-                }));
-                Promise.all(promises).then(infos => {
-                    console.log("All token metadata found.");
-                    this.state.tokens = infos;
-                });
-            });
+
 		});
+
+	getTokensByAddress = (address) =>
+        new Promise((resolve, reject) => {
+        	if(!address) {
+        		resolve([]);
+        		return;
+            }
+            this.state.ContractInstance.getOwnedTokens(address, (err, result) => {
+                console.log("Owned token ids: " + result);
+                resolve(result);
+            });
+        }).then((result) => {
+            if(result == null) return;
+            let promises = result.map(id => new Promise((resolve, reject) => {
+                console.log("Searching meta info for id " + id);
+                this.state.ContractInstance.metaInfos(id, (err, result) => {
+                    resolve(new TokenMeta(result[0], result[1], result[2], result[3], result[4]));
+                });
+            }));
+            Promise.all(promises).then(infos => {
+                console.log("All token metadata found.");
+                this.state.tokens = infos;
+            });
+        });
 
 	render() {
 		return (
