@@ -15,6 +15,7 @@ import 'bootstrap';
 import Landing from './Landing/landing';
 import Market from './Market/market';
 import Collection from './Collection/collection';
+import CollectionMap from './CollectionMap/collectionMap';
 
 
 
@@ -22,7 +23,8 @@ export default {
 	// GLOBALS
 	Landing,
 	Market,
-	Collection
+	Collection,
+	CollectionMap
 
 	// PUBLIC PAGES
 	// index: (...args) =>

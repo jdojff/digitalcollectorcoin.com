@@ -33,16 +33,16 @@ class Landing extends React.Component {
 						<div className="logo">
 							<InlineSVG src={dccLogo} />
 						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>
-						<a href="market.html" className="customButton">Dalyvauti</a>
+						<p>First ever, one-of-a-kind digital collector coin</p>
+						<a href="market.html" className="customButton">Participate</a>
 					</div>
 					<div className="col-lg-6 bg-blue">
 						<div className="cta">
 							<InlineSVG src={header} />
-							<form>
+							<form method="GET" action="collection.html">
 								<label>Enter collection address to view it</label>
-								<input />
-								<a href="#" className="customButton">View collection</a>
+								<input value="0x1245bD304ed9C70C1B7A89F7619E7E53A78850Bd" name="address"/>
+								<input type="submit" value="View collection" className="customButton"/>
 							</form>
 						</div>
 					</div>
@@ -50,7 +50,7 @@ class Landing extends React.Component {
 				<div className="row bg-grey">
 					<div className="col-lg-6 leftSide">
 						<h3>HOW TO BECOME A DIGITAL COLLECTOR</h3>
-						<p className="fz22">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						<p className="fz22">To participate in the sale of the digital collector coin and to access your collection on the decentralised application in a user friendly way, please use MetaMask on Ropsten Network.</p>
 					</div>
 					<div className="col-lg-6 tac">
 						<div className="metaMaskLogo">

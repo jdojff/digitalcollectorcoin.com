@@ -130,7 +130,7 @@ class Collection extends React.Component {
 						<div className="col-lg-3 np bg-white">
 							<div className="sidebar">
 								<div className="logo">
-									<InlineSVG src={dccLogo}/>
+									<a href="index.html"><InlineSVG src={dccLogo}/></a>
 								</div>
 								<ul>
 									<li>
@@ -149,19 +149,15 @@ class Collection extends React.Component {
 						</div>
 						<div className="col-lg-9 np">
 							<div className="dashboard">
-								<h4>Marketplace</h4>
-								<ul>
-									<li>
-										<a className="active">
-											City coins
-										</a>
-									</li>
-									<li>
-										<a>
-											Map view
-										</a>
-									</li>
-								</ul>
+								<h4>Your Collection</h4>
+									<ul>
+										<li>
+											<a href="collection.html" className="active">City Coins</a>
+										</li>
+										<li>
+											<a href="collectionMap.html">Map View</a>
+										</li>
+									</ul>
 								<div className="achievments">
 									<div className="container">
 										<div className="row">

@@ -135,7 +135,7 @@ class Market extends React.Component {
 					<div className="col-lg-3 np bg-white">
 						<div className="sidebar">
 							<div className="logo">
-								<InlineSVG src={dccLogo}/>
+								<a href="index.html"><InlineSVG src={dccLogo}/></a>
 							</div>
 							<ul>
 								<li>
