@@ -1,4 +1,5 @@
 *.idea
+*.iml
 *.git
 build/
 dist/build.js
