@@ -14,6 +14,7 @@ class Landing extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			ethAddress: '0x1245bD304ed9C70C1B7A89F7619E7E53A78850Bd'
 		}
 	}
 
@@ -23,6 +24,10 @@ class Landing extends React.Component {
 
 	componentWillUnmount() {
 		this._isMounted = false;
+	}
+
+	handleChange(event) {
+		this.setState({ethAddress: event.target.value})
 	}
 
 	render() {
@@ -41,7 +46,7 @@ class Landing extends React.Component {
 							<InlineSVG src={header} />
 							<form method="GET" action="collection.html">
 								<label>Enter collection address to view it</label>
-								<input value="0x1245bD304ed9C70C1B7A89F7619E7E53A78850Bd" name="address"/>
+								<input type="text" name="address" value={this.state.ethAddress} onChange={this.handleChange.bind(this)}/>
 								<input type="submit" value="View collection" className="customButton"/>
 							</form>
 						</div>
