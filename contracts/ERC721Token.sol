@@ -62,6 +62,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
         string countryName;
         string image;
         Region[] regions;
+        uint256[] regionIds;
         //helpers
         bool isCreated;
     }
@@ -72,6 +73,7 @@ contract ERC721Token is ERC721, ERC721BasicToken {
         string regionName;
         string image;
         City[] cities;
+        uint256[] cityIds;
         //helpers
         bool isCreated;
     }
@@ -116,7 +118,8 @@ contract ERC721Token is ERC721, ERC721BasicToken {
         region.isCreated = true;
 
         //assign region to country
-        country.regions.push(region);
+        //country.regions.push(region);
+        country.regionIds.push(_regionId);
     }
 
     function createCity(uint256 _regionId, uint256 _cityId, string _cityName, string _image, uint256 _maxLimit) public {
@@ -138,8 +141,10 @@ contract ERC721Token is ERC721, ERC721BasicToken {
         city.isCreated = true;
 
         //assign city to region
-        region.cities.push(city);
+        //region.cities.push(city);
+        region.cityIds.push(_cityId);
     }
+
   /**
    * @dev Constructor function
    */
@@ -164,6 +169,10 @@ contract ERC721Token is ERC721, ERC721BasicToken {
       revert();
     }
   }
+
+    function getRegions(uint256 _countryId) public constant returns (uint256[]){
+        return countries[_countryId].regionIds;
+    }
 
     function getOwnedTokens(address _address) public constant returns (uint256[]){
         return ownedTokens[_address];
