@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import Web3 from 'web3';
+import Web3 from 'web3';
 import InlineSVG from 'svg-inline-react';
 import dccLogo from './../../img/dcclogo.svg';
 import coin from './../../img/coin10.svg'
@@ -21,37 +21,39 @@ class Collection extends React.Component {
         this.state = {
             tokens: [],
             ContractInstance: {},
+        };
+
+        if(typeof web3 !== 'undefined'){
+            console.log("Using web3 detected from external source like Metamask");
+            this.web3 = new Web3(web3.currentProvider)
+        }else{
+            let defaultUrl = "https://ropsten.infura.io/71ukfYiWPi14YO5MJDgu";
+            console.log("No web3 detected. Falling back to http://localhost:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
+            console.log("Connect to default url: " + defaultUrl );
+            this.web3 = new Web3(new Web3.providers.HttpProvider(defaultUrl))
+        }
+        let MyContract = null;
+        try {
+            MyContract = this.web3.eth.contract(abi);
+        } catch (e) {
+            console.log("Ups an error occurred: ", e);
         }
 
-        // if(typeof web3 != 'undefined'){
-        //     console.log("Using web3 detected from external source like Metamask")
-        //     this.web3 = new Web3(web3.currentProvider)
-        // }else{
-        //     console.log("No web3 detected. Falling back to http://localhost:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
-        //     this.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
-        // }
-        // let MyContract = null;
-        // try {
-        //     MyContract = web3.eth.contract(abi);
-        // } catch (e) {
-        //
-        // }
-
-        // this.state.ContractInstance = !MyContract ? null : MyContract.at("0xD83D90A35B2F22dbB72a0f56DF04594df42021c1");
+        this.state.ContractInstance = !MyContract ? null : MyContract.at("0xD83D90A35B2F22dbB72a0f56DF04594df42021c1");
         window.a = this.state
 	}
 
     componentDidMount() {
         this._isMounted = true;
 
-        // let url = new URL(window.location.href);
-        // let address = url.searchParams.get("address");
-        // if(!address) {
-        //     address = !!this.state.ContractInstance ? web3.eth.accounts[0] : null;
-        // }
+        let url = new URL(window.location.href);
+        let address = url.searchParams.get("address");
+        if(!address) {
+            address = !!this.state.ContractInstance ? this.web3.eth.accounts[0] : null;
+        }
 
         Promise.all([
-            // this.getTokensByAddress(address),
+            this.getTokensByAddress(address),
             this.updateState(),
             this.getRegions()
         ]).then(() => {
