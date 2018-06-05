@@ -17,7 +17,7 @@ class Collection extends React.Component {
 	_isMounted = false;
 
 	constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             tokens: [],
             ContractInstance: {},
@@ -168,352 +168,12 @@ class Collection extends React.Component {
 									<div className="container">
 										<div className="row">
 											<div className="col-lg-1"></div>
-											<div className="col-lg-2">
-												<div className="achievment">
-													<div className="iconAchievment">
-														<InlineSVG src={this.state.regions[0].imagePlaceholder} />
-													</div>
-													<div className="achievmentName">
-														{this.state.regions[0].name}
-													</div>
-												</div>
-											</div>
-											<div className="col-lg-2">
-												<div className="achievment">
-													<div className="iconAchievment">
-														<InlineSVG src={this.state.regions[1].imagePlaceholder} />
-													</div>
-													<div className="achievmentName">
-														{this.state.regions[1].name}
-													</div>
-												</div>
-											</div>
-											<div className="col-lg-2">
-												<div className="achievment">
-													<div className="iconAchievment">
-														<InlineSVG src={this.state.regions[2].imagePlaceholder} />
-													</div>
-													<div className="achievmentName">
-														{this.state.regions[2].name}
-													</div>
-												</div>
-											</div>
-											<div className="col-lg-2">
-												<div className="achievment">
-													<div className="iconAchievment">
-														<InlineSVG src={this.state.regions[3].imagePlaceholder} />
-													</div>
-													<div className="achievmentName">
-														{this.state.regions[3].name}
-													</div>
-												</div>
-											</div>
-											<div className="col-lg-2">
-												<div className="achievment">
-													<div className="iconAchievment">
-														<InlineSVG src={this.state.regions[4].imagePlaceholder} />
-													</div>
-													<div className="achievmentName">
-														{this.state.regions[4].name}
-													</div>
-												</div>
-											</div>
+                                           <AllRegionsComponent regions={this.state.regions}/>
 										</div>
 									</div>
 								</div>
 								<div className="market">
-									<div className="container">
-										<div className="row">
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														{this.hasToken(this.state.cities[0].name) ? (
-															<InlineSVG src={this.state.cities[0].imageFull}/>
-														) : (
-															<InlineSVG src={this.state.cities[0].imagePlaceholder}/>
-														)}
-													</div>
-													<div className="desc">
-														{this.state.cities[0].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														{this.hasToken(this.state.cities[1].name) ? (
-															<InlineSVG src={this.state.cities[1].imageFull}/>
-														) : (
-															<InlineSVG src={this.state.cities[1].imagePlaceholder}/>
-														)}
-													</div>
-													<div className="desc">
-														{this.state.cities[1].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[2].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[2].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[3].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[3].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[4].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[4].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[0].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[0].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[1].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[1].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[2].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[2].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[3].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[3].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[4].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[4].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[0].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[0].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[1].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[1].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[2].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[2].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[3].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[3].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[4].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[4].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[0].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[0].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[1].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[1].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[2].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[2].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[3].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[3].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-											<div className="col-lg-3 col-md-4">
-												<div className="coinBox">
-													<div className="iconContainer">
-														<InlineSVG src={this.state.cities[4].imagePlaceholder}/>
-													</div>
-													<div className="desc">
-														{this.state.cities[4].name}
-													</div>
-													<div className="price">
-														50 Eur
-													</div>
-													<a className="buyButton">Buy</a>
-												</div>
-											</div>
-										</div>
-									</div>
+									<AllCitiesComponent cities={this.state.cities}/>
 								</div>
 							</div>
 						</div>
@@ -522,10 +182,75 @@ class Collection extends React.Component {
 			)
 		}
 		return null;
-
 	}
 }
 
+let AllRegionsComponent = React.createClass({
+    render() {
+        console.log("Rendering all regions component");
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-1"></div>
+                    {
+                        this.props.regions.map(function (region) {
+                            return (
+                                <div className="col-lg-2">
+                                    <div className="achievment">
+                                        <div className="iconAchievment">
+                                            <InlineSVG src={region.imagePlaceholder}/>
+                                        </div>
+                                        <div className="achievmentName">
+                                            {region.name}
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            </div>
+        )
+    }
+});
+
+let AllCitiesComponent = React.createClass({
+    render() {
+        console.log("Rendering all cities component");
+        return (
+            <div className="container">
+                <div className="row">
+                    {
+                        this.props.cities.map(function (city) {
+                            return (
+								<div className="col-lg-3 col-md-4">
+									<div className="coinBox">
+										<div className="iconContainer">
+											/*todo: need to fix*/
+											{/*this.hasToken(city.name) ? (
+												<InlineSVG src={city.imageFull}/>
+											) : */(
+												<InlineSVG src={city.imagePlaceholder}/>
+											)}
+										</div>
+										<div className="desc">
+											{city.name}
+										</div>
+										<div className="price">
+											50 Eur
+										</div>
+										<a className="buyButton">Buy</a>
+									</div>
+								</div>
+							)
+						})
+					}
+				</div>
+			</div>
+		)
+    }
+});
+
 export default() => {
-	ReactDOM.render(<Collection />, document.querySelector('#root'))
+	ReactDOM.render(<Collection />, document.querySelector('#root'));
 }

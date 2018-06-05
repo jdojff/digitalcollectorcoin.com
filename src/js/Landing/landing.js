@@ -12,7 +12,7 @@ class Landing extends React.Component {
 	_isMounted = false;
 
 	constructor(props) {
-		super(props)
+		super(props);
 		this.state = {
 			ethAddress: '0x1245bD304ed9C70C1B7A89F7619E7E53A78850Bd'
 		}
