@@ -1,37 +1,30 @@
 const path = require('path');
 
 module.exports = {
-	entry: {
-		build: path.join(__dirname, 'src/js', 'main.js')
-	},
-	output: {
-		path: path.join(__dirname, 'dist'),
-		filename: '[name].js',
-		publicPath: '/dist/',
-		chunkFilename: '[name].[chunkhash].js',
+    entry: './src/index.js',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.js',
+        publicPath: '/dist/',
+		chunkFilename: '[chunkhash].js',
 		library: 'EntryPoint',
 		libraryTarget: 'var',
 		libraryExport: 'default',
 		sourceMapFilename: 'bundle.js.map'
 	},
-	devtool: 'eval-cheap-module-source-map',
 	module: {
-		loaders: [{
+		rules: [{
 				test: /\.css$/,
 				use: ['style-loader', 'css-loader'],
 				include: /src/
 			},
 			{
-				test: /\.jsx?$/,
-				loader: 'babel-loader',
+				test: /\.(js|jsx)$/,
+				loader: 'babel-loader?presets[]=react,presets[]=es2015,presets[]',
 				exclude: /node_modules/,
 				query: {
 					presets: ['env', 'react', 'stage-2']
 				}
-			},
-			{
-				test: /\.json$/, // To load the json files
-				loader: 'json-loader'
 			},
 			{
 				test: /\.(scss)$/,
@@ -62,4 +55,4 @@ module.exports = {
 			}
 		]
 	}
-}
+};
